@@ -2,8 +2,8 @@ import router from "express";
 import { login, register } from "../controllers/UsersController.js";
 import users from "../models/UsersModel.js";
 
-import { insertProduct } from "../controllers/CRUDController.js";
-import products from "../models/ProductsModel.js";
+import { insertProduct } from "../../Products/controllers/CRUDController.js";
+import products from "../../Products/models/ProductsModel.js";
 const userRoutes = router();
 
 userRoutes.post("/register", async (req, res) => {
@@ -44,7 +44,6 @@ userRoutes.post("/insertProducts", async (req, res) => {
   try {
     let data = await insertProduct(req.body);
     // const [nameProduct, description, price, image, stock] = data;
-
     console.log(data);
 
     const product = new products({

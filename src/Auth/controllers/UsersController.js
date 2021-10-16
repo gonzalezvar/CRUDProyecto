@@ -1,36 +1,34 @@
 import users from "../models/UsersModel.js";
-import { emailTest,passwordTest,namesTest } from "./Validation/Validation.js";
+import { emailTest, passwordTest, namesTest } from "./Validation/Validation.js";
 
-const login = async({email, password}) => {
-    const user = await users.find();
-    
-    if(!email == '' && !password == ''){
-        for(let i=0; i<user.length; i++){
-            const bEmail = user[i].email; console.log(bEmail);
-            const bPassword = user[i].password;
-            if(bEmail === email && bPassword === password){
-                return {name: user[i].name,
-                        lastName:user[i].lastName,
-                        role:user[i].role}
+const login = async ({ email, password }) => {
+    const user = await users.findOne({ email });
+
+        if (user != null) {
+            if (user.email === email) {
+                if (user.password === password) {
+                    console.log(user);
+                }else{
+                    return {fail: "contraseña incorrecta"}
+                }
+            }else{
+                return {fail: "Correo incorrecto"}
             }
-            else{
-                return {error: "error al ingresar"}
-            }
-        }    
-    }else{
-        return {error:"Datos Vacios"}
-    }
+        } else {
+            return {fail: "Datos incorrectos"}
+        }
+
 }
 
-const register = async({email,password,name,lastName,role,shop}) => {
-    const data = await users.findOne({email});
+const register = async ({ email, password, name, lastName, role, shop }) => {
+    const data = await users.findOne({ email });
 
-    if(data == null){
-        if(emailTest(email)==true){
-            if(passwordTest(password)==true){
-                if(namesTest(name)==true){
-                    if(namesTest(lastName)){
-                        return{ 
+    if (data == null) {
+        if (emailTest(email) == true) {
+            if (passwordTest(password) == true) {
+                if (namesTest(name) == true) {
+                    if (namesTest(lastName)) {
+                        return {
                             email,
                             password,
                             name,
@@ -38,26 +36,26 @@ const register = async({email,password,name,lastName,role,shop}) => {
                             role,
                             shop
                         }
-                    }else{
-                        return{error:"El apellido no puede contener numeros"}
+                    } else {
+                        return { error: "El apellido no puede contener numeros" }
                     }
-                }else{
-                    return{error:"El nombre no puede contener numeros"};
+                } else {
+                    return { error: "El nombre no puede contener numeros" };
                 }
-            }else{
-                return{error:"La contraseña debe contener 1 Mayuscula/Simbolo/Numero"}
+            } else {
+                return { error: "La contraseña debe contener 1 Mayuscula/Simbolo/Numero" }
             }
-        }else{
-            return{error:"Error en el email"}
+        } else {
+            return { error: "Error en el email" }
         }
 
-    }else{
+    } else {
         return {
-            error:"El correo ya está en uso"
+            error: "El correo ya está en uso"
         }
     }
 }
 
 
 
-export {login,register} ;
+export { login, register };

@@ -10,6 +10,6 @@ const UsersModel = new Schema({
     shop : { type: String, required: false },
 })
 
-const users = mongoose.model('user', UsersModel);
+const users = mongoose.model('User', UsersModel);
 export default users;
 //module.exports = mongoose.model('company', Co

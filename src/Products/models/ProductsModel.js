@@ -8,7 +8,8 @@ const ProductsModel = new Schema({
     price: { type: Number, required: true },
     image: { type: String, required: true },
     stock: { type: Number, required: true },
+    id: {type:String, required:false},
 })
 
-const products = mongoose.model('product', ProductsModel)
-export default products
+const products = mongoose.model('Product', ProductsModel)
+export default products;
