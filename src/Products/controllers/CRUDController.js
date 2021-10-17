@@ -47,7 +47,6 @@ const deleteProduct = async ({ id }) => {
 
 const searchProduct = async () => { 
     const product = await products.find();
-    console.log(product)
     if (product != null) {
         return product
     } else {

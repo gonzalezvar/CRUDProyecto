@@ -7,7 +7,12 @@ const login = async ({ email, password }) => {
         if (user != null) {
             if (user.email === email) {
                 if (user.password === password) {
-                    console.log(user);
+                    return{
+                        email:user.email,
+                        name:user.name,
+                        lastName:user.lastName,
+                        role:user.role,
+                    }
                 }else{
                     return {fail: "contraseña incorrecta"}
                 }
