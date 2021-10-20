@@ -2,6 +2,7 @@ import products from "../models/ProductsModel.js"
 import mongoose from 'mongoose';
 
 const insertProduct = async ({ nameProduct, description, price, image, stock }) => {
+    console.log(nameProduct)
     if (stock >= 1) {
         if (nameProduct.length > 5) {
             if (description.length > 10) {
@@ -48,10 +49,20 @@ const deleteProduct = async ({ id }) => {
 const searchProduct = async () => { 
     const product = await products.find();
     if (product != null) {
-        return product
+        return product;
     } else {
         return { fail: "Sin productos" } 
     }
 }
 
-export { insertProduct, updateProduct, deleteProduct, searchProduct }
+const filterNameProduct = async({name}) => {
+    const product = await products.find()
+    const resultProducts = [];
+    product.forEach((result)=>{
+        if(result.nameProduct.includes(name)){
+            resultProducts.push(result)
+        }
+    });
+    return resultProducts;
+}
+export { insertProduct, updateProduct, deleteProduct, searchProduct,filterNameProduct}

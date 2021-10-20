@@ -1,5 +1,5 @@
 import router from "express";
-import { insertProduct, updateProduct, deleteProduct, searchProduct } from "../controllers/CRUDController.js";
+import { insertProduct, updateProduct, deleteProduct, searchProduct, filterNameProduct } from "../controllers/CRUDController.js";
 import products from "../models/ProductsModel.js"
 const ProductsRoutes = router();
 
@@ -37,6 +37,11 @@ ProductsRoutes.post("/deleteProduct", async (req, res)=> {
 
 ProductsRoutes.get("/searchProduct", async (req, res)=> {
     let data = await searchProduct(req);
+    res.json(data);
+});
+
+ProductsRoutes.post("/filterNameProduct", async (req, res)=> {
+    let data = await filterNameProduct(req.body);
     res.json(data);
 });
 

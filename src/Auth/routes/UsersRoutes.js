@@ -40,25 +40,6 @@ userRoutes.post("/login", async (req, res) => {
   }
 });
 
-userRoutes.post("/insertProducts", async (req, res) => {
-  try {
-    let data = await insertProduct(req.body);
-    // const [nameProduct, description, price, image, stock] = data;
-    console.log(data);
 
-    const product = new products({
-      nameProduct: data.nameProduct,
-      description: data.description,
-      price: data.price,
-      image: data.image,
-      stock: data.stock,
-    });
-
-    await product.save()
-    res.json("Producto Agregado")
-  } catch (e) {
-    console.log(e);
-  }
-});
 
 export default userRoutes;
