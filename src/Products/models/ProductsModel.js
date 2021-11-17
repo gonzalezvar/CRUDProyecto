@@ -9,6 +9,7 @@ const ProductsModel = new Schema({
     image: { type: String, required: true },
     stock: { type: Number, required: true },
     id: {type:String, required:false},
+    idOwner:{type:String, required:false},
 })
 
 const products = mongoose.model('Product', ProductsModel)

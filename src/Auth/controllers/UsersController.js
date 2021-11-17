@@ -8,6 +8,7 @@ const login = async ({ email, password }) => {
             if (user.email === email) {
                 if (user.password === password) {
                     return{
+                        id:user._id,
                         email:user.email,
                         name:user.name,
                         lastName:user.lastName,

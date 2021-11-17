@@ -24,7 +24,7 @@ userRoutes.post("/register", async (req, res) => {
     });
 
     await user.save();
-    res.json("Registro Existoso");
+    res.json(true);
   } catch (e) {
     res.json(e);
   }
